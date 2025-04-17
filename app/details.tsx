@@ -7,7 +7,7 @@ export default function DetailsScreen() {
 
   return (
     <View style={styles.container}>
-      <Text>Manager</Text>
+      <Text>Agrega tus gastos</Text>
       <InputComponent
         value={managerName}
         onChangeText={setManagerName}
