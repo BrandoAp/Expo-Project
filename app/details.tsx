@@ -11,7 +11,7 @@ export default function DetailsScreen() {
       <InputComponent
         value={managerName}
         onChangeText={setManagerName}
-        placeholder={'Nombre del manager'}
+        placeholder={'Ingrese nombre del gasto'}
       />
     </View>
   );
