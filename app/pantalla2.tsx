@@ -4,38 +4,29 @@ import {
   View,
   StyleSheet,
   Modal,
-  TextInput,
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
+import InputComponent from '@/components/inputComponent';
+import { usePresupuesto } from '@/hooks/presupuesto';
 
 const Pantalla2 = () => {
-  const [presupuesto, setPresupuesto] = useState('');
-  const [presupuestoRestante, setPresupuestoRestante] = useState('');
-  const [mostrarPresupuestoModal, setMostrarPresupuestoModal] = useState(true);
-  const [mostrarGastoModal, setMostrarGastoModal] = useState(false);
-  const [inputPresupuesto, setInputPresupuesto] = useState('');
-  const [inputGasto, setInputGasto] = useState('');
-  const [verArticulo, setVerArticulo] = useState(false);
-
-  const confirmarPresupuesto = () => {
-    setPresupuesto(inputPresupuesto);
-    setPresupuestoRestante(inputPresupuesto);
-    setMostrarPresupuestoModal(false);
-  };
-
-  const registrarGasto = () => {
-    const gasto = parseFloat(inputGasto);
-    const restante = parseFloat(presupuestoRestante);
-    if (!isNaN(gasto) && gasto <= restante) {
-      const nuevoRestante = restante - gasto;
-      setPresupuestoRestante(nuevoRestante.toFixed(2));
-      setMostrarGastoModal(false);
-      setInputGasto('');
-    } else {
-      alert('Gasto inválido o mayor al presupuesto restante.');
-    }
-  };
+  const {
+    presupuesto,
+    presupuestoRestante,
+    mostrarGastoModal,
+    mostrarPresupuestoModal,
+    inputPresupuesto,
+    inputGasto,
+    verArticulo,
+    setInputGasto,
+    setInputPresupuesto,
+    setMostrarGastoModal,
+    setMostrarPresupuestoModal,
+    setVerArticulo,
+    confirmarPresupuesto,
+    registrarGasto,
+  } = usePresupuesto();
 
   return (
     <ImageBackground
@@ -49,14 +40,15 @@ const Pantalla2 = () => {
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
               <Text style={styles.label}>¿Cuál es tu presupuesto semanal?</Text>
-              <TextInput
-                style={styles.input}
-                keyboardType="numeric"
+              <InputComponent
                 value={inputPresupuesto}
                 onChangeText={setInputPresupuesto}
-                placeholder="Ej: 100.00"
+                placeholder='Ej: 100.00'
+                keyboardType='numeric'
               />
-              <TouchableOpacity onPress={confirmarPresupuesto} style={styles.botonGasto}>
+              <TouchableOpacity 
+                onPress={confirmarPresupuesto} 
+                style={styles.botonGasto}>
                 <Text style={styles.botonTexto}>Confirmar</Text>
               </TouchableOpacity>
             </View>
@@ -68,14 +60,14 @@ const Pantalla2 = () => {
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
               <Text style={styles.label}>¿Cuánto has gastado?</Text>
-              <TextInput
-                style={styles.input}
-                keyboardType="numeric"
+              <InputComponent
                 value={inputGasto}
                 onChangeText={setInputGasto}
-                placeholder="Ej: 20.00"
+                placeholder='Ej: 100.00'
+                keyboardType='numeric'
               />
-              <TouchableOpacity onPress={registrarGasto} style={styles.botonGasto}>
+              <TouchableOpacity onPress={registrarGasto} 
+                style={styles.botonGasto}>
                 <Text style={styles.botonTexto}>Registrar gasto</Text>
               </TouchableOpacity>
             </View>
@@ -168,6 +160,13 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 70,
   },
+  botonCancelar: {
+    backgroundColor: '#ccc',
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 8,
+    marginTop: 10,
+  },  
   botonVer: {
     backgroundColor: '#FFD1DC',
     paddingVertical: 10,
@@ -183,10 +182,14 @@ const styles = StyleSheet.create({
   },
   articuloTexto: {
     fontSize: 16,
+    fontWeight: 'bold',
     color: '#333',
     textAlign: 'center',
     marginTop: 10,
     paddingHorizontal: 10,
+    backgroundColor: '#FFB6C1',
+    padding: 2,
+    borderRadius: 8, 
   },
   modalContainer: {
     flex: 1,
@@ -204,13 +207,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
     textAlign: 'center',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#FFB6C1',
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 15,
-    fontSize: 18,
   },
 });

@@ -27,13 +27,14 @@ export default function InputComponent({
 
 const styles = StyleSheet.create({
   input: {
-    height: 40,
-    margin: 12,
     borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
+    borderColor:"#FFB6C1",
+    borderRadius: 5,
     padding: 10,
+    marginBottom: 15,
+    fontSize: 18,
     backgroundColor: "#fff",
     width: 250,
+    alignSelf: "center",
   },
 });
