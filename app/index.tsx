@@ -1,41 +1,65 @@
+import React from 'react';
+import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
 
-export default function HomeScreen() {
+const index = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Manejador de Gastos</Text>
+      <Image source={require('../imagenes/logo.jpeg')} style={styles.image} />
 
-      <Link href="/details" asChild>
-        <Pressable style={styles.boton}>
-          <Text style={styles.botonTexto}>Ir a Gestión</Text>
-        </Pressable>
+      <Text style={styles.pinkText}>¡Bienvenido al Gestor de gastos!</Text>
+      <Text style={styles.pinkclaroText}>
+        Gestor de gastos es una aplicación para controlar los gastos de una manera rápida y sencilla
+      </Text>
+
+      <Link href="/pantalla2" asChild>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Comenzar</Text>
+        </TouchableOpacity>
       </Link>
     </View>
   );
-}
+};
+
+export default index;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    backgroundColor: '#fff',
+    width: '100%',
+    height: '100%',
   },
-  title: {
-    fontSize: 24,
+  image: {
+    width: 120,
+    height: 120,
     marginBottom: 20,
-    fontWeight: 'bold',
+    resizeMode: 'contain',
   },
-  boton: {
-    backgroundColor: '#1e90ff',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
+  pinkText: {
+    color: '#FF007F',
+    fontSize: 20,
+    marginBottom: 10,
   },
-  botonTexto: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
+  pinkclaroText: {
+    color: '#FFB6C1',
+    fontSize: 20,
+    marginBottom: 10,
+    textAlign: 'center',
+    paddingHorizontal: 20,
+  },
+  button: {
+    backgroundColor: '#FFB6C1',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    marginTop: 20,
+  },
+  buttonText: {
+    color: '#FF007F',
+    fontSize: 18,
+    textAlign: 'center',
   },
 });
